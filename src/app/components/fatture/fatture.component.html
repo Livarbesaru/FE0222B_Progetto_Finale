@@ -99,22 +99,22 @@
       <thead class="bg-dark">
         <tr>
           <th scope="col">#</th>
+          <th scope="col">Data</th>
           <th scope="col">Nome</th>
           <th scope="col">Cognome</th>
           <th scope="col">Stato</th>
           <th scope="col">Importo</th>
-          <th scope="col">anno</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let fattura of fatture">
-          <th scope="row">{{fattura.id}}</th>
-          <th scope="row">{{fattura.cliente.nomeContatto}}</th>
-          <th scope="row">{{fattura.cliente.cognomeContatto}}</th>
+          <th scope="row">{{fattura?.id}}</th>
+          <th scope="row">{{fattura?.data?.toString()?.slice(0,10)}}</th>
+          <th scope="row">{{fattura?.cliente?.nomeContatto}}</th>
+          <th scope="row">{{fattura?.cliente?.cognomeContatto}}</th>
           <th scope="row">{{fattura?.stato?.nome}}</th>
-          <th scope="row">{{fattura.importo}}€</th>
-          <th scope="row">{{fattura.anno}}</th>
+          <th scope="row">{{fattura?.importo}}€</th>
           <th scope="row" class="bg-white">
             <button class="btn btn-primary text-center" type="button"
             data-toggle="collapse" [attr.data-target]="'#collapseFatt'+fattura.id"
@@ -176,22 +176,22 @@
       <thead class="bg-dark">
         <tr>
           <th scope="col">#</th>
+          <th scope="col">Data</th>
           <th scope="col">Nome</th>
           <th scope="col">Cognome</th>
           <th scope="col">Stato</th>
           <th scope="col">Importo</th>
-          <th scope="col">anno</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let fattura of fattureAny[pageFilter]">
-          <th scope="row">{{fattura.id}}</th>
-          <th scope="row">{{fattura.cliente.nomeContatto}}</th>
-          <th scope="row">{{fattura.cliente.cognomeContatto}}</th>
+          <th scope="row">{{fattura?.id}}</th>
+          <th scope="row">{{fattura?.data?.toString()?.slice(0,10)}}</th>
+          <th scope="row">{{fattura?.cliente?.nomeContatto}}</th>
+          <th scope="row">{{fattura?.cliente?.cognomeContatto}}</th>
           <th scope="row">{{fattura?.stato?.nome}}</th>
-          <th scope="row">{{fattura.importo}}€</th>
-          <th scope="row">{{fattura.anno}}</th>
+          <th scope="row">{{fattura?.importo}}€</th>
           <th scope="row" class="bg-white">
             <button class="btn btn-primary text-center" type="button"
             data-toggle="collapse" [attr.data-target]="'#collapseFatt'+fattura.id"

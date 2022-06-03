@@ -1,0 +1,28 @@
+<div class="card m-3 d-flex flex-column text-center m-5 mx-auto" style="width: 60%;font-size: 1.3rem;" >
+  <h5 class="card-title m-0 text-center text-dark p-2 bg-secondary text-white" style="height: 20%;font-size: 5rem;">Campo di Login</h5>
+  <div class="card-footer d-flex flex-wrap justify-content-evenly" style="width:auto;height: 80%;">
+  <form [formGroup]="form" #test="ngForm" (ngSubmit)="login(test)">
+    <fieldset formGroupName="utente" class="d-flex flex-column">
+      <div class="d-flex flex-column">
+        <label for="username">Username</label>
+        <input formControlName="username" type="text" id="username"/>
+        <ng-container *ngIf="controlloType('utente.username')?.invalid && controlloType('utente.username')?.touched" >
+          <p *ngIf="errorType('utente.username','required')">il campo è obbligatorio</p>
+        </ng-container>
+      </div>
+      <div class="d-flex flex-column">
+        <label for="pass">Password</label>
+        <input formControlName="password" type="text" id="pass" />
+        <ng-container *ngIf="controlloType('utente.password')?.invalid && controlloType('utente.password')?.touched" >
+          <p *ngIf="errorType('utente.password','required')">il campo è obbligatorio</p>
+          <p *ngIf="errorType('utente.password','minlength')">Richiede come minimo almeno 6 caratteri</p>
+        </ng-container>
+      </div>
+    </fieldset>
+    <div>
+
+    </div>
+    <button type="submit" [disabled]="!form.valid" class="btn bg-success m-2 text-white">Entra</button>
+  </form>
+  </div>
+</div>

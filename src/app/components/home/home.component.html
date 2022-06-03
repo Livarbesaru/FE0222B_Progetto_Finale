@@ -1,0 +1,69 @@
+<div class="d-flex flex-wrap mx-auto container">
+  <div class="col-12 d-flex flex-md-row flex-column flex-xs-wrap my-5">
+    <div class="col-md-6 m-1 p-2 rounded d-flex flex-column justify-content-center card-footer" [routerLink]="['/fatture']">
+      <h1 class="text-center text-white col-md-6" style="font-size: 3rem;">Fatture</h1>
+      <img src="assets/invoice-3739354_1920-1024x741.jpg"
+       alt="" style="width:100%;" class="col-md-6">
+    </div>
+    <div class="col-md-6 m-1 p-2 rounded d-flex flex-column justify-content-center card-footer" [routerLink]="['/clienti']">
+      <h1 class="text-center text-white col-md-6" style="font-size: 3rem;">Clienti</h1>
+      <img src="assets/reclutamiento-20-occmundial.png"
+       alt="" style="width:100%;" class="col-md-6">
+    </div>
+  </div>
+  <div class="col-md-12 bg-secondary mx-2 my-2 p-2 d-flex flex-wrap rounded" *ngIf=" clientiRicchi==null">
+    <h2 class="text-white" style="font-size: 3rem;">Statistiche in Caricamento
+      <div class="spinner-border text-light" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </h2>
+  </div>
+  <button class="btn btn-success mt-5 mx-auto" type="button"
+  data-toggle="collapse" data-target="#collapseExample4"
+  aria-expanded="false" aria-controls="collapseExample4" *ngIf="clientiRicchi!=null" style="width: 60%;">
+  Statistiche
+  </button>
+  <div class="collapse col-md-12 my-2 p-2 d-flex flex-wrap rounded justify-content-center" id="collapseExample4" *ngIf="clientiRicchi!=null">
+    <div class="collapse col-lg-4 justidy-content-center bg-white border border-dark d-flex flex-column" id="collapseExample4">
+      <div class="collapse card-footer bordercol-md-6" style="width:auto;" id="collapseExample4">
+        <div class="bg-white"><canvas id="myCanvasRendimento" width="auto" height="auto" class="my-3"></canvas></div>
+      </div>
+      <div class="collapse card-footer border col-md-6" style="width:auto;height: 49.9%;" id="collapseExample4">
+        <h3 class="text-center" style="font-size: 3rem;">
+          Caste clienti
+        </h3>
+        <ul class="collapse" id="collapseExample4">
+          <li class="d-flex" ><span class="col-2" style="color: red;" >█</span>
+            <span class="col-5" >Non abbienti Fatturato tra:</span><span >0 & 15000</span></li>
+          <li class="d-flex" ><span class="col-2" style="color: darkorange;" >█</span>
+            <span class="col-5" >Classe media Fatturato tra:</span><span >15000 & 25000</span></li>
+          <li class="d-flex" ><span class="col-2" style="color: lightseagreen;" >█</span>
+            <span class="col-5" >Classe medio alta Fatturato tra:</span><span >25000 & 40000</span></li>
+          <li class="d-flex" ><span class="col-2" style="color: rgb(196, 231, 54);" >█</span>
+            <span class="col-5" >Classe alta Fatturato tra:</span><span >40000 & 70000</span></li>
+          <li class="d-flex" ><span class="col-2" style="color: green;" >█</span>
+            <span class="col-5" >Classe Vip Fatturato tra:</span><span >70000 & $$$$$$</span></li>
+        </ul>
+        <ul>
+          <li  class="d-flex flex-column bg-white" style="width:auto;height: 100%;">
+            <b class="col-lg-12 text-center my-1" style="font-size: 1rem;">N.Clienti</b>
+            <b class="col-md-12 text-center my-1" style="font-size: 2rem;">{{clienti}}</b>
+            <ul>
+              <li  class="d-flex flex-column" style="width:auto;height: 100%;">
+                <b class="col-lg-12 text-center" style="font-size: 1rem;">Clienti Protetti</b>
+                <b class="col-md-12 text-center" style="font-size: 2rem;">{{clienti-(clientiRicchi+clientialta+clientiMediAlta+clientiMedi+clientiNonAbb)}}</b>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="collapse col-lg-3 d-flex flex-column card-footer p-0 border border-dark align-content-start" style="width: auto;" id="collapseExample4">
+      <div class="d-flex flex-column bg-white justify-content-center col-md-6" id="collapseExample4" style="width: 100%;">
+        <h3 class="collapse text-center" style="font-size: 2rem;" id="collapseExample4">Fatture eseguite</h3>
+        <div class="collapse col-md-4" id="collapseExample4"><canvas id="chartContainer" style="height: auto;width: auto;" class="my-3"></canvas></div>
+        <div class="collapse col-md-4" id="collapseExample4"><canvas id="myCanvas" width="auto" height="auto" class="my-3"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>

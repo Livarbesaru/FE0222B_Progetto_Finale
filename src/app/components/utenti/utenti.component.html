@@ -1,0 +1,36 @@
+<div id="CaricamentoPagina" *ngIf="users==null||users.length===0">
+  <h1 class="text-white" style="font-size: 3rem;">La pagina sta caricando
+    <div class="spinner-border text-light" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </h1>
+</div>
+<div class="scatolacollapse m-2 bg-secondary border-dark rounded p-2 text-white bg-dark" style="height: 100%;" *ngIf="users.length>0">
+  <table class="table table-sm text-center text-white bg-secondary">
+    <thead class="bg-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user?.roles[0]?.roleName.slice(5,user?.roles[0]?.roleName?.length)}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <nav class="d-flex justify-content-center">
+    <ul class="pagination pagination-sm">
+      <li class="page-item" aria-current="page" *ngFor="let page of pages">
+        <span class="page-link bg-dark text-white" (click)="getUsersPages(page)" >
+          {{page+1}}
+        </span>
+      </li>
+    </ul>
+  </nav>
+</div>

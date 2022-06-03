@@ -1,0 +1,241 @@
+<div id="CaricamentoPagina" *ngIf="!client">
+  <h1 class="text-white" style="font-size: 3rem;">La pagina sta caricando
+    <div class="spinner-border text-light" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </h1>
+</div>
+<div style="font-size: 1.5rem;" *ngIf="client">
+  <div *ngIf="client">
+    <div class="d-flex justify-content-evenly">
+      <button class="btn btn-dark border-white bg-secondary mt-5 col-md-3" type="button"
+      data-toggle="collapse" data-target="#collapseExample4"
+      aria-expanded="false" aria-controls="collapseExample4">
+      Filtra fatture
+      </button>
+      <button class="btn btn-success mt-5 col-md-3" type="button"
+      data-toggle="collapse" data-target="#collapseNewFattura"
+      aria-expanded="false" aria-controls="collapseNewFattura">
+      Nuova fattura
+      </button>
+    </div>
+    <div class="d-flex" style="font-size: 1.5rem;">
+      <div class="collapse m-2 bg-white p-3 rounded col-md-6 mx-auto" id="collapseExample4" style="width: 35%;">
+        <div class="container my-2">
+          <div>
+            <h3 class="py-3">Filtra per intervallo di data</h3>
+            <div class="col-md-12 d-flex m-2">
+              <label for="start" class="col-md-6 ">Inizio data:</label>
+
+              <input type="date" id="startDate" name="trip-start" class="col-md-6 ">
+            </div>
+          </div>
+          <div class=" col-md-12 d-flex m-2">
+            <label for="start" class="col-md-6">Fine data:</label>
+
+            <input type="date" id="finishDate" name="trip-start" class="col-md-6">
+          </div>
+          <button (click)="getFattByDateBeetween()" class="btn btn-dark bg-dark">Filtra per data</button>
+        </div>
+        <div class="container my-2 d-flex flex-column">
+          <h3 class="py-3">Filtra per stato di pagamento</h3>
+            <select id="paymentStatus" class="p-1">
+              <option value=""></option>
+              <option value="PAGATA">PAGATA</option>
+              <option value="NON PAGATA">NON PAGATA</option>
+
+            </select>
+            <button (click)="getFattbyStat()" class="btn btn-dark bg-dark d-block my-1">Filtra per status</button>
+        </div>
+        <button (click)="ngOnInit()" *ngIf="filterControl"> reset</button>
+      </div>
+
+      <div class="collapse m-2 bg-white p-3 rounded col-md-6 mx-auto" id="collapseNewFattura" style="width: 35%;font-size: 2rem;">
+        <div class="m-2">
+          <form [formGroup]="form" #test="ngForm" (ngSubmit)="submitRegi(test)">
+            <fieldset formGroupName="fattura">
+              <div class="d-flex m-3">
+                <label for="stato" class="col-md-6">Stato</label>
+                <select name="stato" formControlName="stato" id="stato" class="col-md-6">
+                  <option value=""></option>
+                  <option value="PAGATA">PAGATA</option>
+                  <option value="NON PAGATA">NON PAGATA</option>
+                </select>
+              </div>
+              <div class="d-flex m-3">
+                <label for="stato" class="col-md-6">Importo</label>
+                <input type="text" name="importo" formControlName="importo" id="importo" class="col-md-6" style="font-size: 1.5rem;">
+              </div>
+            </fieldset>
+            <button type="submit" [disabled]="!form.valid" class="btn bg-success" style="width: 35%;font-size: 1.5rem;">Crea</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-center my-5">
+      <div class="container-fluid col-xxl-3 mx-auto justify-content-center flex-column flex-md-row">
+        <div class="d-flex flex-xs-column flex-wrap justify-content-center" style="width: auto; height: 20%;">
+              <div class="card m-3 d-flex flex-column" style="width: auto">
+                <h5 class="card-title text-center text-dark" style="height: 20%; font-size: 2rem;">{{client?.nomeContatto}} {{client?.cognomeContatto}}</h5>
+                <div class="card-footer border" style="width:auto;">
+                  <ul>
+                    <li class="d-flex"><span class="col-md-6">Client.N:</span>
+                      <span class="col-md-6">{{client?.id}}</span></li>
+                    <li class="d-flex"><span class="col-md-6">Email:</span>
+                      <span class="col-md-6">{{client?.email}}</span></li>
+                    <li class="d-flex"><span class="col-md-6">Fatturato annuale:</span>
+                      <span class="col-md-6">{{client?.fatturatoAnnuale}}€</span></li>
+                      <li *ngIf="client.indirizzoSedeLegale!=null || client.indirizzoSedeLegale">
+                        <div class="d-flex justify-content-center">
+                          <button class="btn btn-dark my-2 mx-auto" type="button"
+                          data-toggle="collapse" data-target="#collapseExample"
+                          aria-expanded="false" aria-controls="collapseExample">
+                          Sede legale
+                          </button>
+                        </div>
+                        <div class="collapse m-2" id="collapseExample">
+                          <table>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Provincia:</span>
+                             <span class="col-md-6">
+                                {{client.indirizzoSedeLegale?.comune?.provincia?.nome}}
+                                | {{client.indirizzoSedeLegale?.comune?.provincia?.sigla}}
+                             </span>
+                            </td></tr>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Comune:</span>
+                             <span class="col-md-6">{{client?.indirizzoSedeLegale?.comune?.nome}}</span>
+                            </td></tr>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Localita':</span>
+                              <span class="col-md-6">{{client?.indirizzoSedeLegale?.localita}}</span>
+                            </td></tr>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Via:</span>
+                              <span class="col-md-6">
+                                {{client.indirizzoSedeLegale.via}}
+                                | Civico:{{client.indirizzoSedeLegale.civico}}
+                              </span>
+                            </td></tr>
+                          </table>
+                        </div>
+                      </li>
+                      <li *ngIf="client.indirizzoSedeOperativa!=null">
+                       <div class="d-flex justify-content-center">
+                          <button class="btn btn-dark my-2" type="button"
+                          data-toggle="collapse" data-target="#collapseExample2"
+                          aria-expanded="false" aria-controls="collapseExample2">
+                          Sede Operativa
+                          </button>
+                       </div>
+                        <div class="collapse m-2" id="collapseExample2">
+                          <table>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Provincia:</span><span class="col-md-6">
+                                {{client.indirizzoSedeOperativa?.comune?.provincia?.nome}}
+                                | {{client.indirizzoSedeOperativa?.comune?.provincia?.sigla}}
+                              </span></td></tr>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Comune:</span>
+                              <span class="col-md-6">{{client?.indirizzoSedeOperativa?.comune?.nome}}</span></td></tr>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Localita':</span>
+                              <span class="col-md-6">{{client?.indirizzoSedeOperativa?.localita}}</span></td></tr>
+                            <tr><td class="d-flex border p-2"><span class="col-md-6">Via:</span><span class="col-md-6">{{client.indirizzoSedeOperativa.via}}
+                              | Civico:{{client.indirizzoSedeOperativa.civico}}</span></td></tr>
+                          </table>
+                        </div>
+                      </li>
+                    <li class="d-flex p-2"><span class="col-md-6">Partita Iva:</span>
+                      <span class="col-md-6">{{client?.partitaIva}}</span></li>
+                    <li class="d-flex p-2"><span class="col-md-6">Pec:</span>
+                      <span class="col-md-6">{{client?.pec}}</span></li>
+                    <li class="d-flex p-2"><span class="col-md-6">Telefono:</span>
+                      <span class="col-md-6">{{client?.telefono}}</span></li>
+                    <li class="d-flex p-2"><span class="col-md-6">Tipo cliente:</span>
+                      <span class="col-md-6">{{client?.tipoCliente}}</span></li>
+                  </ul>
+                  <div class="d-flex col-12 justify-content-center">
+                    <button class="btn btn-dark bg-warning col-6 text-dark" (click)="goToClientEdit(client.id)" style="font-size: 1.5rem;">Modifica Cliente</button>
+                  </div>
+                </div>
+              </div>
+                <nav class="d-flex flex-column" *ngIf="!filterControl">
+                  <div class="m-auto">
+                    <ul class="pagination pagination-sm">
+                      <li class="page-item" aria-current="page">
+                        <span class="page-link bg-dark text-white">
+                          Pagina:{{pagina+1}}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul class="pagination pagination-sm d-flex justify-content-center">
+                      <li class="page-item" aria-current="page">
+                        <span class="page-link bg-dark text-white" (click)="inizioPagina()" >
+                          Inizio
+                        </span>
+                      </li>
+                      <li class="page-item" aria-current="page">
+                        <span class="page-link bg-dark text-white" (click)="dimPagina()" >
+                          Prima
+                        </span>
+                      </li>
+                      <li class="page-item" aria-current="page">
+                        <span class="page-link bg-dark text-white" (click)="aumPagina()" >
+                          Dopo
+                        </span>
+                      </li>
+                      <li class="page-item" aria-current="page">
+                        <span class="page-link bg-dark text-white" (click)="finePagina()" >
+                          Fine
+                        </span>
+                      </li>
+                    </ul>
+                    <h3 class="mt-3 text-center"><span class="text-white">Tot:{{fattureCanvas.length}}|</span>
+                      <span class="text-success"> Pagate:{{fattPagate.length}} </span> <span class="text-white"> | </span>
+                      <span class="text-danger">Non pagate:{{fattNonPagate.length}}</span></h3>
+                    <div class="d-flex flex-column bg-white my-2 rounded p-2">
+                      <canvas id="myCanvas" width="auto" height="auto" style="border:1px solid #c3c3c3;" class="my-3">
+                      </canvas>
+                      <canvas id="chartContainer" style="height: auto;width: auto;" class="my-3"></canvas>
+                    </div>
+                  </div>
+                </nav>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div id="CaricamentoPagina" *ngIf="caricamento===true && fatture.length===0">
+          <h1 class="text-white" style="font-size: 3rem;">Caricamento fatture
+            <div class="spinner-border text-light" role="status">
+              <span class="sr-only"></span>
+            </div>
+          </h1>
+        </div>
+          <div>
+            <div class="d-flex flex-wrap justify-content-center flex-column flex-md-row">
+                  <div class="card m-2 col-xs-3" style="width:auto" *ngFor="let elemento of fatture">
+                      <h5 class="card-title text-center text-dark" style="height: 5%;">n.{{elemento.id}}</h5>
+                      <div class="card-body text-center">
+                        <h3>Data: {{elemento?.data?.toString()?.slice(0,10)}}</h3>
+                        <ul class="m-2"><li>Importo:{{elemento?.importo}}</li></ul>
+                      </div>
+                      <div class="card-footer" style="width:auto;height: 60%;">
+                        <ul>
+                          <li class="text-center">Stato: {{elemento?.stato?.nome}}</li>
+                          <li class="mt-2">
+                            <button class="btn bg-warning" type="button"
+                            data-toggle="collapse" [attr.data-target]="'#collapseExample'+elemento.id"
+                            aria-expanded="false" [attr.aria-controls]="'collapseExample'+elemento.id" style="width: 100%;">
+                            Modifica fattura
+                            </button>
+                            <div class="collapse m-2" id="collapseExample{{elemento.id}}">
+                              <button class="btn bg-success mb-3 mt-1" (click)="goToPages(elemento.id)">Modifica fattura</button>
+                            <th scope="row"><button class="btn bg-danger" (click)="deleteFatt(elemento.id)">Cancella fattura</button>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                  </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

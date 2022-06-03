@@ -1,0 +1,56 @@
+<div class="card m-3 d-flex flex-column text-center m-5 mx-auto" style="width: 60%;font-size: 1.3rem;" >
+  <h5 class="card-title m-0 text-center text-dark p-2 bg-secondary text-white" style="height: 20%;font-size: 5rem;">Campo di registrazione</h5>
+  <div class="card-footer d-flex flex-wrap justify-content-evenly" style="width:auto;height: 80%;">
+  <form [formGroup]="form" #test="ngForm" (ngSubmit)="submitRegi(test)">
+    <fieldset formGroupName="utente" class="d-flex flex-column">
+      <div class="d-flex flex-column">
+        <label for="username">Username</label>
+        <input formControlName="username" type="text" id="username"/>
+        <div *ngIf="controlloType('utente.username')?.invalid && controlloType('utente.username')?.touched">
+          <p *ngIf="errorType('utente.username','required')">Il campo e'obbligatorio</p>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <label for="email">Email</label>
+        <input formControlName="email" type="text" id="email"/>
+        <div *ngIf="controlloType('utente.email')?.invalid && controlloType('utente.email')?.touched">
+          <p *ngIf="errorType('utente.email','required')">Il campo e'obbligatorio</p>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <label for="pass">Password</label>
+        <input formControlName="password" type="password" id="pass" />
+        <div *ngIf="controlloType('utente.password')?.invalid && controlloType('utente.password')?.touched">
+          <p *ngIf="errorType('utente.password','required')">Il campo e'obbligatorio</p>
+          <p *ngIf="errorType('utente.password','minlength')">Il campo deve contenere almeno 6 cifre</p>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <label for="name">Nome</label>
+        <input formControlName="name" type="text" id="name" />
+        <div *ngIf="controlloType('utente.name')?.invalid && controlloType('utente.name')?.touched">
+          <p *ngIf="errorType('utente.name','required')">Il campo e'obbligatorio</p>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <label for="lastName">Cognome</label>
+        <input formControlName="lastName" type="text" id="lastName" />
+        <div *ngIf="controlloType('utente.lastName')?.invalid && controlloType('utente.lastName')?.touched">
+          <p *ngIf="errorType('utente.lastName','required')">Il campo e'obbligatorio</p>
+        </div>
+      </div>
+      <div class="d-flex flex-column">
+        <label for="role">Ruolo</label>
+        <select name="role" formControlName="role">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <div *ngIf="controlloType('utente.role')?.invalid && controlloType('utente.role')?.touched">
+          <p *ngIf="errorType('utente.role','required')">Il campo e'obbligatorio</p>
+        </div>
+      </div>
+    </fieldset>
+    <button type="submit" [disabled]="!form.valid" class="btn bg-success m-2 text-white">Registrati</button>
+  </form>
+</div>
+</div>

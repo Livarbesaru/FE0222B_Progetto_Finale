@@ -1,0 +1,245 @@
+<div class="bg-white container" style="font-size: 1.5rem;">
+  <div class="card card-footer m-3 mx-auto">
+    <form [formGroup]="form" #test="ngForm" (ngSubmit)="submitRegi(test.value)">
+      <fieldset formGroupName="utente">
+        <div class="d-flex flex-md-row flex-column flex-xs-wrap">
+          <div class="col-md-6">
+            <h3 class="h1 text-center">Dati nominativi</h3>
+            <div id="Dati Nominativi" formGroupName="DatiNominativi" class="m-2 p-2 border">
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="nomeContatto" class="col-md-6">Nome</label>
+                <input formControlName="nomeContatto" type="text" id="nomeContatto" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiNominativi.nomeContatto')?.invalid && controlloType('utente.DatiNominativi.nomeContatto')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiNominativi.nomeContatto','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="cognomeContatto" class="col-md-6">Cognome</label>
+                <input formControlName="cognomeContatto" type="text" id="cognomeContatto" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiNominativi.cognomeContatto')?.invalid && controlloType('utente.DatiNominativi.cognomeContatto')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiNominativi.cognomeContatto','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="emailContatto" class="col-md-6">Email</label>
+                <input formControlName="emailContatto" type="email" id="emailContatto" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiNominativi.emailContatto')?.invalid && controlloType('utente.DatiNominativi.emailContatto')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiNominativi.emailContatto','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="TelefonoContatto" class="col-md-6">Telefono</label>
+                <input formControlName="TelefonoContatto" type="text" id="TelefonoContatto" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiNominativi.TelefonoContatto')?.invalid && controlloType('utente.DatiNominativi.TelefonoContatto')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiNominativi.TelefonoContatto','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h3 class="h1 text-center">Dati aziendali</h3>
+            <div id="DatiAziendali" formGroupName="DatiAziendali" class="m-2 p-2 border">
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="ragioneSociale" class="col-md-6">Ragione sociale</label>
+                <input formControlName="ragioneSociale" type="text" id="ragioneSociale" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiAziendali.ragioneSociale')?.invalid && controlloType('utente.DatiAziendali.ragioneSociale')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.ragioneSociale','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="partitaIva" class="col-md-6">Partita Iva</label>
+                <input formControlName="partitaIva" type="text" id="partitaIva" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiAziendali.partitaIva')?.invalid && controlloType('utente.DatiAziendali.partitaIva')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.partitaIva','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="Pec" class="col-md-6">Pec</label>
+                <input formControlName="Pec" type="text" id="Pec" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiAziendali.Pec')?.invalid && controlloType('utente.DatiAziendali.Pec')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.Pec','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="emailAziendale" class="col-md-6">Email aziendale</label>
+                <input formControlName="emailAziendale" type="text" id="emailAziendale" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiAziendali.emailAziendale')?.invalid && controlloType('utente.DatiAziendali.emailAziendale')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.emailAziendale','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="TelefonoAziendale" class="col-md-6">Telefono aziendale</label>
+                <input formControlName="TelefonoAziendale" type="text" id="TelefonoAziendale" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiAziendali.TelefonoAziendale')?.invalid && controlloType('utente.DatiAziendali.TelefonoAziendale')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.TelefonoAziendale','required')">Il campo e'obbligatorio</p>
+                </div>
+                <div *ngIf="controlloType('utente.DatiAziendali.TelefonoAziendale')?.invalid && controlloType('utente.DatiAziendali.TelefonoAziendale')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.TelefonoAziendale','pattern')">
+                    Il campo deve contenere numeri
+                  </p>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="tipoCliente" class="col-md-6">Tipo Cliente</label>
+                <select name="tipoCliente" formControlName="tipoCliente" class="col-md-6">
+                  <option value="SRL">SRL</option>
+                  <option value="SPA">SPA</option>
+                  <option value="SAS">SAS</option>
+                  <option value="PA">PA</option>
+                </select>
+                <div *ngIf="controlloType('utente.DatiAziendali.tipoCliente')?.invalid && controlloType('utente.DatiAziendali.tipoCliente')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.tipoCliente','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+                <div class="d-flex flex-wrap border p-2 m-2">
+                <label for="fatturatoAnnuo" class="col-md-6">Fatturato Annuo</label>
+                <input formControlName="fatturatoAnnuo" type="text" id="fatturatoAnnuo" class="col-md-6"/>
+                <div *ngIf="controlloType('utente.DatiAziendali.fatturatoAnnuo')?.invalid && controlloType('utente.DatiAziendali.fatturatoAnnuo')?.touched" class="col-md-12">
+                  <p *ngIf="errorType('utente.DatiAziendali.fatturatoAnnuo','required')">Il campo e'obbligatorio</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 d-flex flex-md-row flex-column flex-xs-wrap">
+          <div id="SedeLegale" formGroupName="SedeLegale" class="p-2 col-md-6 border">
+            <div class="d-flex justify-content-center">
+              <button class="btn btn-dark my-2" type="button"
+              data-toggle="collapse" data-target="#collapseExampleSedeLegale"
+              aria-expanded="false" aria-controls="collapseExampleSedeLegale">
+              Sede legale
+              </button>
+            </div>
+            <div class="collapse m-2" id="collapseExampleSedeLegale">
+              <div class="collapse m-2" id="collapseExampleSedeLegale">
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="provinciaLegale" class="col-md-6">Provincia legale</label>
+                  <select formControlName="provinciaLegale" name="provinciaLegale" id="provinciaLegale" class="col-md-6">
+                    <option value=""></option>
+                    <option value="{{provincia.nome}}" *ngFor="let provincia of province">{{provincia.nome}}</option>
+                  </select>
+                  <div *ngIf="controlloType('utente.SedeLegale.provinciaLegale')?.invalid && controlloType('utente.SedeLegale.provinciaLegale')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeLegale.provinciaLegale','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+              </div>
+              <div class="collapse m-2" id="collapseExampleSedeLegale">
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="comuneLegale" class="col-md-6">Comune legale</label>
+                  <select formControlName="comuneLegale" name="comuneLegale" id="comuneLegale" class="col-md-6">
+                    <option value=""></option>
+                    <option value="{{comune.nome}}" *ngFor="let comune of comuni">{{comune.nome}}</option>
+                  </select>
+                  <div *ngIf="controlloType('utente.SedeLegale.comuneLegale')?.invalid && controlloType('utente.SedeLegale.comuneLegale')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeLegale.comuneLegale','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="capLegale" class="col-md-6">Cap</label>
+                  <input formControlName="capLegale" type="text" id="capLegale" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeLegale.capLegale')?.invalid && controlloType('utente.SedeLegale.capLegale')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeLegale.capLegale','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+               <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="localitaLegale" class="col-md-6">Localitá legale</label>
+                  <input formControlName="localitaLegale" type="text" id="localitaLegale" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeLegale.localitaLegale')?.invalid && controlloType('utente.SedeLegale.localitaLegale')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeLegale.localitaLegale','required')">Il campo e'obbligatorio</p>
+                  </div>
+               </div>
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="viaLegale" class="col-md-6">via legale</label>
+                  <input formControlName="viaLegale" type="text" id="viaLegale" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeLegale.viaLegale')?.invalid && controlloType('utente.SedeLegale.viaLegale')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeLegale.viaLegale','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+               <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="civicoLegale" class="col-md-6">Civico</label>
+                  <input formControlName="civicoLegale" type="text" id="civicoLegale" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeLegale.civicoLegale')?.invalid && controlloType('utente.SedeLegale.civicoLegale')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeLegale.civicoLegale','required')">Il campo e'obbligatorio</p>
+                  </div>
+               </div>
+              </div>
+            </div>
+          </div>
+          <div id="SedeOperativa" formGroupName="SedeOperativa" class="p-2 col-md-6 border">
+            <div class="d-flex justify-content-center">
+              <button class="btn btn-dark my-2" type="button"
+              data-toggle="collapse" data-target="#collapseExampleSedeOperativa"
+              aria-expanded="false" aria-controls="collapseExampleSedeOperativa">
+              Sede operativa
+              </button>
+            </div>
+            <div class="collapse m-2" id="collapseExampleSedeOperativa">
+              <div class="collapse m-2" id="collapseExampleSedeOperativa">
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="provinciaOperativa" class="col-md-6">Provincia operativa</label>
+                  <select formControlName="provinciaOperativa" name="provinciaOperativa" id="provinciaOperativa" class="col-md-6">
+                    <option value=""></option>
+                    <option value="{{provincia.nome}}" *ngFor="let provincia of province">{{provincia.nome}}</option>
+                  </select>
+                  <div *ngIf="controlloType('utente.SedeOperativa.provinciaOperativa')?.invalid && controlloType('utente.SedeOperativa.provinciaOperativa')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeOperativa.provinciaOperativa','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+              </div>
+              <div class="collapse m-2" id="collapseExampleSedeOperativa">
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="comuneOperativa" class="col-md-6">Comune Operativa</label>
+                  <select formControlName="comuneOperativa" name="comuneOperativa" id="comuneOperativa" class="col-md-6">
+                    <option value=""></option>
+                    <option value="{{comune.nome}}" *ngFor="let comune of comuni">{{comune.nome}}</option>
+                  </select>
+                  <div *ngIf="controlloType('utente.SedeOperativa.comuneOperativa')?.invalid && controlloType('utente.SedeOperativa.comuneOperativa')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeOperativa.comuneOperativa','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="capOperativa" class="col-md-6">Cap</label>
+                  <input formControlName="capOperativa" type="text" id="capOperativa" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeOperativa.capOperativa')?.invalid && controlloType('utente.SedeOperativa.capOperativa')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeOperativa.capOperativa','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="localitaOperativa" class="col-md-6">Localitá Operativa</label>
+                  <input formControlName="localitaOperativa" type="text" id="localitaOperativa" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeOperativa.localitaOperativa')?.invalid && controlloType('utente.SedeOperativa.localitaOperativa')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeOperativa.localitaOperativa','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+               <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="viaOperativa" class="col-md-6">via Operativa</label>
+                  <input formControlName="viaOperativa" type="text" id="viaOperativa" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeOperativa.viaOperativa')?.invalid && controlloType('utente.SedeOperativa.viaOperativa')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeOperativa.viaOperativa','required')">Il campo e'obbligatorio</p>
+                  </div>
+               </div>
+                <div class="d-flex flex-wrap border p-2 m-2">
+                  <label for="civicoOperativa" class="col-md-6">Civico</label>
+                  <input formControlName="civicoOperativa" type="text" id="civicoOperativa" class="col-md-6"/>
+                  <div *ngIf="controlloType('utente.SedeOperativa.civicoOperativa')?.invalid && controlloType('utente.SedeOperativa.civicoOperativa')?.touched" class="col-md-12">
+                    <p *ngIf="errorType('utente.SedeOperativa.civicoOperativa','required')">Il campo e'obbligatorio</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="d-flex justify-content-center">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-warning text-dark my-3" style="width: 30%;" *ngIf="!form.valid">
+          Registra
+        </button>
+        <button type="submit" [disabled]="!form.valid" class="btn btn-success text-white my-3" style="width: 30%;" *ngIf="form.valid">
+          Registra
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+</div>

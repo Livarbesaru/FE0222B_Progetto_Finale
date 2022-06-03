@@ -1,0 +1,126 @@
+<div id="CaricamentoPagina" *ngIf="client==null && fattura==null">
+  <h1 class="text-white" style="font-size: 3rem;">La pagina sta caricando
+    <div class="spinner-border text-light" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </h1>
+</div>
+<div class="card m-3 d-flex flex-column text-center container mx-auto" style="width: auto" *ngIf="client">
+  <h5 class="card-title text-center text-dark" style="font-size: 3rem;">Fattura di {{client?.nomeContatto}} {{client?.cognomeContatto}} n.{{fattura?.id}}</h5>
+  <div class="card-footer d-flex flex-wrap justify-content-evenly">
+    <div class="card m-3 d-flex flex-column col-md-10" style="width: 40%;font-size: 1.5rem;">
+      <h5 class="card-title text-center text-dark" style="height: 20%; font-size: 2rem;">{{client?.nomeContatto}} {{client?.cognomeContatto}}</h5>
+      <div class="card-footer border" style="width:auto;">
+        <ul>
+          <li class="d-flex border rounded p-2 m-2"><span class="col-md-6">Client.N:</span>
+            <span class="col-md-6">{{client?.id}}</span></li>
+          <li class="d-flex border rounded p-2 m-2"><span class="col-md-6">Email:</span>
+            <span class="col-md-6">{{client?.email}}</span></li>
+          <li class="d-flex border rounded p-2 m-2"><span class="col-md-6">Fatturato annuale:</span>
+            <span class="col-md-6"><span *ngIf="client?.fatturatoAnnuale==null">0</span>{{client?.fatturatoAnnuale}}€</span></li>
+            <li *ngIf="client.indirizzoSedeLegale!=null || client.indirizzoSedeLegale">
+              <button class="btn btn-dark my-2" type="button"
+              data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" aria-controls="collapseExample">
+              Sede legale
+              </button>
+              <div class="collapse m-2" id="collapseExample">
+                <table class="mx-auto">
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Provincia:</span>
+                   <span class="col-md-6">
+                      {{client?.indirizzoSedeLegale?.comune?.provincia?.nome}}
+                      | {{client?.indirizzoSedeLegale?.comune?.provincia?.sigla}}
+                   </span>
+                  </td></tr>
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Comune:</span>
+                   <span class="col-md-6">{{client?.indirizzoSedeLegale?.comune?.nome}}</span>
+                  </td></tr>
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Localita':</span>
+                    <span class="col-md-6">{{client?.indirizzoSedeLegale?.localita}}</span>
+                  </td></tr>
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Via:</span>
+                    <span class="col-md-6">
+                      {{client.indirizzoSedeLegale.via}}
+                      | Civico:{{client.indirizzoSedeLegale.civico}}
+                    </span>
+                  </td></tr>
+                </table>
+              </div>
+            </li>
+            <li *ngIf="client.indirizzoSedeOperativa!=null">
+              <button class="btn btn-dark my-2" type="button"
+              data-toggle="collapse" data-target="#collapseExample2"
+              aria-expanded="false" aria-controls="collapseExample2">
+              Sede Operativa
+              </button>
+              <div class="collapse m-2" id="collapseExample2">
+                <table class="mx-auto">
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Provincia:</span><span class="col-md-6">
+                      {{client?.indirizzoSedeOperativa?.comune?.provincia?.nome}}
+                      | {{client?.indirizzoSedeOperativa?.comune?.provincia?.sigla}}
+                    </span></td></tr>
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Comune:</span>
+                    <span class="col-md-6">{{client?.indirizzoSedeOperativa?.comune?.nome}}</span></td></tr>
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Localita':</span>
+                    <span class="col-md-6">{{client?.indirizzoSedeOperativa?.localita}}</span></td></tr>
+                  <tr><td class="d-flex border p-2 m-2"><span class="col-md-6">Via:</span><span class="col-md-6">{{client.indirizzoSedeOperativa.via}}
+                    | Civico:{{client?.indirizzoSedeOperativa?.civico}}</span></td></tr>
+                </table>
+              </div>
+            </li>
+          <li class="d-flex border rounded p-2 m-2"><span class="col-md-6">Partita Iva:</span>
+            <span class="col-md-6">{{client?.partitaIva}}</span></li>
+          <li class="d-flex border rounded p-2 m-2"><span class="col-md-6">Pec:</span>
+            <span class="col-md-6">{{client?.pec}}</span></li>
+          <li class="d-flex border rounded p-2 m-2"><span class="col-md-6">Telefono:</span>
+            <span class="col-md-6">{{client?.telefono}}</span></li>
+          <li class="d-flex border rounded p-2 m-2"><span class="col-md-6">Tipo cliente:</span>
+            <span class="col-md-6">{{client?.tipoCliente}}</span></li>
+        </ul>
+      </div>
+      <button (click)="goToPages()" class="btn bg-warning m-2" style="font-size: 1.5rem;">Vai al cliente</button>
+    </div>
+    <div class="text-center col-md-2 my-auto" style="width: 40%;font-size: 1.5rem;">
+      <div class="d-flex flex-wrap justify-content-center flex-column flex-md-row">
+        <div class="card m-2 col-xs-3" style="width:auto">
+            <h5 class="card-title text-center text-dark" style="height: 5%;">n.{{fattura.id}}</h5>
+            <div class="card-body text-center">
+              <h3>Data: {{fattura?.data?.toString()?.slice(0,10)}}</h3>
+              <ul class="m-2"><li>Importo:{{fattura?.importo}}€</li></ul>
+            </div>
+            <div class="card-footer" style="width:auto;height: 60%;">
+              <ul>
+                <li>stato: {{fattura?.stato?.nome}}</li>
+                <li class="mt-2">
+                  <button class="btn bg-warning" type="button"
+                  data-toggle="collapse" [attr.data-target]="'#collapseExample'+fattura.id"
+                  aria-expanded="false" [attr.aria-controls]="'collapseExample'+fattura.id" style="width: 100%;font-size: 1.5rem;">
+                  Modifica
+                  </button>
+                  <div class="collapse m-2" id="collapseExample{{fattura.id}}">
+                    <form [formGroup]="form" #test="ngForm" (ngSubmit)="submitRegi(test)">
+                      <fieldset formGroupName="fattura">
+                          <label for="stato">stato</label>
+                          <select name="stato" formControlName="stato">
+                            <option value=""></option>
+                            <option value="PAGATA">PAGATA</option>
+                            <option value="NON PAGATA">NON PAGATA</option>
+                          </select>
+                          <div *ngIf="controlloType('utente.stato')?.invalid && controlloType('utente.stato')?.touched">
+                            <p *ngIf="errorType('utente.stato','required')">Il campo e'obbligatorio</p>
+                          </div>
+                      </fieldset>
+                      <div>
+
+                      </div>
+                      <button type="submit" [disabled]="!form.valid" class="btn bg-success m-2 text-white">Aggiorna</button>
+                    </form>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>

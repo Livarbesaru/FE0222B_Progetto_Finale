@@ -1,0 +1,17 @@
+table{
+  background-size: 400% 400%;
+  height: 100%;
+  margin: 2% 0;
+  td,th{
+    &:first-of-type{
+      width: 10%;
+    }
+    width: 30%;
+  }
+}
+
+.scatola{
+  height: 80vh;
+  padding: 1%;
+  border-radius: 5rem;
+}

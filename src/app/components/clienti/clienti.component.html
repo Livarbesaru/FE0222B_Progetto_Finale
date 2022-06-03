@@ -1,0 +1,146 @@
+<div id="CaricamentoPagina" *ngIf="clients==null||clients.length===0">
+  <h1 class="text-white" style="font-size: 3rem;">La pagina sta caricando
+    <div class="spinner-border text-light" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </h1>
+</div>
+<div>
+<div class="d-flex justify-content-center">
+    <button class="btn btn-primary mt-5" type="button"
+  data-toggle="collapse" data-target="#collapseExample4"
+  aria-expanded="false" aria-controls="collapseExample4" style="width: 30%;">
+  Filtra clienti
+  </button>
+</div>
+<div class="collapse m-2 bg-secondary border-dark rounded p-2 text-white" id="collapseExample4" style="font-size: 1.5rem;">
+  <div class="d-flex row">
+    <div class="col-md-12">
+        <div class="py-2 border border-dark rounded m-2">
+          <h3 class="m-2">Filtra per nome e cognome</h3>
+          <div class="py-1 d-flex flex-wrap border border-dark rounded m-2">
+            <label for="Nome" class="col-md-6 p-2 border-dark" style="font-size: 2rem;">Nome:</label>
+
+            <input type="text" id="Nome" name="money-start" class="col-md-6 p-2 border-dark rounded">
+
+          </div>
+          <div class="py-1 d-flex flex-wrap border border-dark rounded m-2">
+            <label for="Cognome" class="col-md-6 p-2 border-dark rounded" style="font-size: 2rem;">Cognome:</label>
+
+            <input type="text" id="Cognome" name="monry-end" class="col-md-6 p-2 border-dark rounded">
+          </div>
+        </div>
+        <div class="py-2 border border-dark rounded m-2">
+          <h3 class="m-2">Filtra per email</h3>
+            <label for="email" class="col-md-6 p-2 border-dark rounded" style="font-size: 2rem;">Email:</label>
+
+            <input type="text" id="email" name="monry-end" class="col-md-6 p-2 border-dark rounded">
+        </div>
+    </div>
+  </div>
+    <div class="d-flex justify-content-center">
+      <button class="m-2 btn btn-dark bg-success col-md-3" (click)="filterClients()">Filtra</button>
+      <button class="m-2 btn btn-dark bg-warning col-md-3" (click)="ngOnInit()"> Reset</button>
+    </div>
+  </div>
+</div>
+<div id="CaricamentoPagina" *ngIf="clients==null">
+  <h1>La pagina sta caricando</h1>
+</div>
+<div class="scatola text-white" *ngIf="clients.length>0 && filtro===false && filtrocompleto===false">
+  <div class="d-flex justify-content-center">
+    <button scope="col" (click)="goToNewClient()" class="btn bg-success text-white" style="width: 30%;">Nuovo Cliente</button>
+  </div>
+  <table class="table table-sm text-center text-white">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ragione Sociale</th>
+        <th scope="col">Partita Iva</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cognome</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients" class="bg-secondary">
+        <th scope="row">{{client?.id}}</th>
+        <th scope="row">{{client?.ragioneSociale}}</th>
+        <th scope="row">{{client?.partitaIva}}</th>
+        <th scope="row">{{client?.nomeContatto}}</th>
+        <th scope="row">{{client?.cognomeContatto}}</th>
+        <td scope="row">{{client?.emailContatto}}</td>
+        <th scope="row" class="bg-white">
+          <button class="btn btn-primary text-center" type="button"
+          data-toggle="collapse" [attr.data-target]="'#collapseClient'+client.id"
+          aria-expanded="false" [attr.aria-controls]="'collapseClient'+client.id">
+          Azioni
+          </button>
+          <tr class="collapse m-2 d-flex flex-column rounded p-1" id="collapseClient{{client.id}}">
+            <td scope="row" class="collapse btn bg-primary col-md-12" (click)="goToPages(client.id)"
+            id="collapseClient{{client.id}}" style="width: 100%;">Fatture</td>
+            <td scope="row" class="collapse btn bg-warning col-md-12" (click)="goToPagesEdit(client.id)"
+            id="collapseClient{{client.id}}" style="width: 100%;">Modifica</td>
+            <td scope="row" class="collapse btn bg-danger col-md-12" (click)="deleteClientAndFatt(client.id)"
+            id="collapseClient{{client.id}}" style="width: 100%;">Elimina</td>
+          </tr>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+  <nav class="d-flex justify-content-center">
+    <ul class="pagination pagination-sm">
+      <li class="page-item" aria-current="page" *ngFor="let page of pages">
+        <span class="page-link bg-dark text-white" (click)="getClientsPages(page)" >
+          {{page+1}}
+        </span>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="scatola text-white" *ngIf="filtro===true && filtrocompleto===true">
+  <div class="d-flex justify-content-center">
+    <button scope="col" (click)="goToNewClient()" class="btn bg-success text-white" style="width: 30%;">Nuovo Cliente</button>
+  </div>
+  <table class="table table-sm text-center text-white">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ragione Sociale</th>
+        <th scope="col">Partita Iva</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cognome</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of filtredClient" class="bg-secondary">
+        <th scope="row">{{client?.id}}</th>
+        <th scope="row">{{client?.ragioneSociale}}</th>
+        <th scope="row">{{client?.partitaIva}}</th>
+        <th scope="row">{{client?.nomeContatto}}</th>
+        <th scope="row">{{client?.cognomeContatto}}</th>
+        <td scope="row">{{client?.emailContatto}}</td>
+        <th scope="row">
+          <button class="btn btn-primary" type="button"
+          data-toggle="collapse" [attr.data-target]="'#collapseClientFiltred'+client.id"
+          aria-expanded="false" [attr.aria-controls]="'collapseClientFiltred'+client.id">
+          Azioni
+          </button>
+          <tr class="collapse m-2 d-flex flex-column" id="collapseClientFiltred{{client.id}}">
+            <td scope="row" class="collapse btn bg-primary col-md-12" (click)="goToPages(client.id)"
+            id="collapseClientFiltred{{client.id}}" style="width: 100%;">Fatture</td>
+            <td scope="row" class="collapse btn bg-warning col-md-12" (click)="goToPagesEdit(client.id)"
+            id="collapseClientFiltred{{client.id}}" style="width: 100%;">Modifica</td>
+            <td scope="row" class="collapse btn bg-danger col-md-12" (click)="deleteClientAndFatt(client.id)"
+            id="collapseClientFiltred{{client.id}}" style="width: 100%;">Elimina</td>
+          </tr>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

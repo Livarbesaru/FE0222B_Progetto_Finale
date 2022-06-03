@@ -186,7 +186,7 @@ export class SingleClientComponent implements OnInit {
         this.sub=this.SinglClient.getFatture(this.id).pipe(tap((fatture)=>{
           this.momentOBJ=fatture
           this.pages=this.momentOBJ.totalPages
-          if(this.pages===0){
+          if(this.pages===1){
             this.sub=this.SinglClient.getFatturePage(this.id,0).pipe(tap((fatture)=>{
               this.momentOBJ=fatture
               this.fatture=this.fatture.concat(this.momentOBJ.content)
@@ -203,7 +203,7 @@ export class SingleClientComponent implements OnInit {
               }
             })).subscribe()
           }
-          else if(this.pages>0){
+          else if(this.pages>1){
             for(let i=this.pages-1;i>=0;i--){
               this.sub=this.SinglClient.getFatturePage(this.id,i).pipe(tap((fatture)=>{
                 this.momentOBJ=fatture
@@ -257,10 +257,12 @@ export class SingleClientComponent implements OnInit {
         this.sub=this.SinglClient.getFatture(this.id).pipe(tap((fatture)=>{
           this.momentOBJ=fatture
           this.pages=this.momentOBJ.totalPages
-          if(this.pages===0){
+          if(this.pages===1){
+            console.log('prova3')
             this.sub=this.SinglClient.getFatturePage(this.id,0).pipe(tap((fatture)=>{
               this.momentOBJ=fatture
               this.fatture=this.fatture.concat(this.momentOBJ.content)
+              console.log(this.fatture)
               for(let c=this.fatture.length-1;c>=0;c--){
                 console.log(this.fatture)
                 let objStatus:string=this.fatture[c].stato.nome
@@ -273,8 +275,8 @@ export class SingleClientComponent implements OnInit {
               }
             })).subscribe()
           }
-          else if(this.pages>0){
-            for(let i=this.momentOBJ.totalPages;i>0;i--){
+          else if(this.pages>1){
+            for(let i=this.pages;i>0;i--){
               this.sub=this.SinglClient.getFatturePage(this.id,i).pipe(tap((fatture)=>{
                 this.momentOBJ=fatture
                 this.fatture=this.fatture.concat(this.momentOBJ.content)

@@ -47,7 +47,7 @@
             </select>
             <button (click)="getFattbyStat()" class="btn btn-dark bg-dark d-block my-1">Filtra per status</button>
         </div>
-        <button (click)="ngOnInit()" *ngIf="filterControl"> reset</button>
+        <button (click)="refreshPage()" *ngIf="filterControl"> reset</button>
       </div>
 
       <div class="collapse m-2 bg-white p-3 rounded col-md-6 mx-auto" id="collapseNewFattura" style="width: 35%;font-size: 2rem;">
